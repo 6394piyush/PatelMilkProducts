@@ -1,0 +1,82 @@
+﻿@model PatelMilkProducts.Models.Khali
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Khali</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Employees.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Employees.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Employees.FatherName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Employees.FatherName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Employees.Village)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Employees.Village)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Qty)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Qty)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.GivenDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.GivenDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Rate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Rate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Signature)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Signature)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

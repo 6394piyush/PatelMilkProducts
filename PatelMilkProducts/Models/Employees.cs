@@ -15,9 +15,14 @@ namespace PatelMilkProducts.Models
         public string FatherName { get; set; }
         public string Village { get; set; }
         public int Contact { get; set; }
+
+        public ICollection<Khali> Khali { get; set; }
+
     }
     public class EmpDBContext : DbContext
     {
         public DbSet<Employees> Employees { get; set; }
+        public DbSet<Khali> Khali { get; set; }
     }
+
 }

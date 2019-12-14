@@ -129,10 +129,29 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhalisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912140530528_EmployeeCreation.cs" />
+    <Compile Include="Migrations\201912140530528_EmployeeCreation.designer.cs">
+      <DependentUpon>201912140530528_EmployeeCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912140533359_KhaliCreation.cs" />
+    <Compile Include="Migrations\201912140533359_KhaliCreation.designer.cs">
+      <DependentUpon>201912140533359_KhaliCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912140615451_KhaliUpdate.cs" />
+    <Compile Include="Migrations\201912140615451_KhaliUpdate.designer.cs">
+      <DependentUpon>201912140615451_KhaliUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912140631350_KhaliPriceRate.cs" />
+    <Compile Include="Migrations\201912140631350_KhaliPriceRate.designer.cs">
+      <DependentUpon>201912140631350_KhaliPriceRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employees.cs" />
+    <Compile Include="Models\Khali.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +195,11 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Khalis\Create.cshtml" />
+    <Content Include="Views\Khalis\Delete.cshtml" />
+    <Content Include="Views\Khalis\Details.cshtml" />
+    <Content Include="Views\Khalis\Edit.cshtml" />
+    <Content Include="Views\Khalis\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -192,6 +216,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912140530528_EmployeeCreation.resx">
+      <DependentUpon>201912140530528_EmployeeCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912140533359_KhaliCreation.resx">
+      <DependentUpon>201912140533359_KhaliCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912140615451_KhaliUpdate.resx">
+      <DependentUpon>201912140615451_KhaliUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912140631350_KhaliPriceRate.resx">
+      <DependentUpon>201912140631350_KhaliPriceRate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
