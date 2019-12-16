@@ -149,6 +149,10 @@
     <Compile Include="Migrations\201912140631350_KhaliPriceRate.designer.cs">
       <DependentUpon>201912140631350_KhaliPriceRate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912141052043_RemovedSomeColumnInKhalis.cs" />
+    <Compile Include="Migrations\201912141052043_RemovedSomeColumnInKhalis.designer.cs">
+      <DependentUpon>201912141052043_RemovedSomeColumnInKhalis.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employees.cs" />
     <Compile Include="Models\Khali.cs" />
@@ -229,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912140631350_KhaliPriceRate.resx">
       <DependentUpon>201912140631350_KhaliPriceRate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912141052043_RemovedSomeColumnInKhalis.resx">
+      <DependentUpon>201912141052043_RemovedSomeColumnInKhalis.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

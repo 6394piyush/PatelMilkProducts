@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<PatelMilkProducts.Models.Employees>
-
+    @using PatelMilkProducts.Models
 @{
     Layout = null;
 }
@@ -10,50 +10,57 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")" type="text/javascript"></script>
+     <script>   
+         $(document).ready(function () {
+            
+            //Dropdownlist Selectedchange event
+            $("#SelectVillage").change(function () {
+                alert("called");
+                $("#VillageMembers").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetVillages")',
+                    dataType: 'json',
+                    data: { VName: $("#SelectVillage").val() },
+                    success: function (vil) {
+                        alert("Village Success" + vil[0]['Village']);
+
+                        // states contains the JSON formatted list
+                        // of states passed from the controller
+                        $.each(vil, function (i, member) {
+                            $("#VillageMembers").append("<tr><td>" + member['Name'] + "</td><td>" + member['FatherName'] + "</td><td>" + member['Village'] + "</td><td>" + member['Contact'] + "</td><td><a href='./Employees/Edit/" + member['Id'] + "'>Edit  |</a></td><td><a href='./Employees/Details/" + member['Id'] + "'>Details  |</a></td><td><a href='./Employees/Delete/" + member['Id'] + "'> Delete</a></td></tr>");
+                           
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
 </head>
 <body>
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
+    <p>
+        @Html.DropDownList("SelectVillage", new SelectList(Enum.GetValues(typeof(Village))), "--Select--Village--", new { @class = "form-control" })
+    </p>
+    <table class=" table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FatherName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Village)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contact)
-            </th>
-            <th></th>
+            <th>Name</th>
+            <th>Father Name</th>
+            <th>Village</th>
+            <th>Contact</th>
+            <th>Actions</th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FatherName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Village)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contact)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-    }
-    
+        <tbody id="VillageMembers">
+
+        </tbody>
     </table>
 </body>
 </html>

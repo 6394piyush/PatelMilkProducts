@@ -117,11 +117,18 @@ namespace PatelMilkProducts.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing) 
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public JsonResult GetVillages(string VName)
+        {
+            string nn = VName;
+            var vlist = db.Employees.Where(emp => (emp.Village == VName)).ToList();
+            //var vlist = db.Employees.ToList();            
+            return Json(vlist);
         }
     }
 }

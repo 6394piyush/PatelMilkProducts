@@ -53,6 +53,7 @@
             @Html.DisplayFor(modelItem => item.Employees.Village)
         </td>
         <td>
+           
             @Html.DisplayFor(modelItem => item.Qty)
         </td>
         <td>
@@ -68,6 +69,10 @@
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+        <td>
+
+            @int.Parse(@item.Rate.ToString())*@int.Parse(@item.Qty.ToString())
         </td>
     </tr>
     }
