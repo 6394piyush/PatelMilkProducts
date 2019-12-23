@@ -1,0 +1,67 @@
+﻿@model PatelMilkProducts.Models.EmpAccount
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div>
+        <h4>EmpAccount</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Employees.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Employees.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TransactionType)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TransactionType)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Signature)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Signature)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

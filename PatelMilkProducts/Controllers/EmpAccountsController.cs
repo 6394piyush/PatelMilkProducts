@@ -10,112 +10,112 @@ using PatelMilkProducts.Models;
 
 namespace PatelMilkProducts.Controllers
 {
-    public class KhalisController : Controller
+    public class EmpAccountsController : Controller
     {
         private EmpDBContext db = new EmpDBContext();
 
-        // GET: Khalis
+        // GET: EmpAccounts
         public ActionResult Index()
         {
-            var khali = db.Khali.Include(k => k.Employees);
-            return View(khali.ToList());
+            var empAccounts = db.EmpAccounts.Include(e => e.Employees);
+            return View(empAccounts.ToList());
         }
 
-        // GET: Khalis/Details/5
+        // GET: EmpAccounts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khali khali = db.Khali.Find(id);
-            if (khali == null)
+            EmpAccount empAccount = db.EmpAccounts.Find(id);
+            if (empAccount == null)
             {
                 return HttpNotFound();
             }
-            return View(khali);
+            return View(empAccount);
         }
 
-        // GET: Khalis/Create
+        // GET: EmpAccounts/Create
         public ActionResult Create()
         {
             ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name");
             return View();
         }
 
-        // POST: Khalis/Create
+        // POST: EmpAccounts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,EmployeesId,EmployeesName,EmployeesFatherName,EmployeesVillage,Qty,GivenDate,Rate,Signature")] Khali khali)
+        public ActionResult Create([Bind(Include = "Id,EmployeesId,Amount,TransactionType,Signature,Comments")] EmpAccount empAccount)
         {
             if (ModelState.IsValid)
             {
-                db.Khali.Add(khali);
+                db.EmpAccounts.Add(empAccount);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", khali.EmployeesId);
-            return View(khali);
+            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", empAccount.EmployeesId);
+            return View(empAccount);
         }
 
-        // GET: Khalis/Edit/5
+        // GET: EmpAccounts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khali khali = db.Khali.Find(id);
-            if (khali == null)
+            EmpAccount empAccount = db.EmpAccounts.Find(id);
+            if (empAccount == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", khali.EmployeesId);
-            return View(khali);
+            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", empAccount.EmployeesId);
+            return View(empAccount);
         }
 
-        // POST: Khalis/Edit/5
+        // POST: EmpAccounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,EmployeesId,EmployeesName,EmployeesFatherName,EmployeesVillage,Qty,GivenDate,Rate,Signature")] Khali khali)
+        public ActionResult Edit([Bind(Include = "Id,EmployeesId,Amount,TransactionType,Signature,Comments")] EmpAccount empAccount)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(khali).State = EntityState.Modified;
+                db.Entry(empAccount).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", khali.EmployeesId);
-            return View(khali);
+            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", empAccount.EmployeesId);
+            return View(empAccount);
         }
 
-        // GET: Khalis/Delete/5
+        // GET: EmpAccounts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khali khali = db.Khali.Find(id);
-            if (khali == null)
+            EmpAccount empAccount = db.EmpAccounts.Find(id);
+            if (empAccount == null)
             {
                 return HttpNotFound();
             }
-            return View(khali);
+            return View(empAccount);
         }
 
-        // POST: Khalis/Delete/5
+        // POST: EmpAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Khali khali = db.Khali.Find(id);
-            db.Khali.Remove(khali);
+            EmpAccount empAccount = db.EmpAccounts.Find(id);
+            db.EmpAccounts.Remove(empAccount);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -127,10 +127,6 @@ namespace PatelMilkProducts.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public JsonResult GetVillageMembers(string vname)
-        {
-            return Json(db.Employees.Where(emp => (emp.Village == vname)).ToList());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PatelMilkProducts.Models.Khali>
+﻿@model IEnumerable<PatelMilkProducts.Models.EmpAccount>
 
 @{
     Layout = null;
@@ -10,10 +10,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     @Styles.Render("~/Content/css")
 </head>
-
 <body>
     <p>
         @Html.ActionLink("Create New", "Create")
@@ -30,16 +28,16 @@
                 @Html.DisplayNameFor(model => model.Employees.Village)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Qty)
+                @Html.DisplayNameFor(model => model.Amount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GivenDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rate)
+                @Html.DisplayNameFor(model => model.TransactionType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Signature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
             </th>
             <th></th>
         </tr>
@@ -56,26 +54,21 @@
             @Html.DisplayFor(modelItem => item.Employees.Village)
         </td>
         <td>
-           
-            @Html.DisplayFor(modelItem => item.Qty)
+            @Html.DisplayFor(modelItem => item.Amount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.GivenDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rate)
+            @Html.DisplayFor(modelItem => item.TransactionType)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Signature)
-        </td>        
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-        <td id="Amount">
-
-            
         </td>
     </tr>
     }

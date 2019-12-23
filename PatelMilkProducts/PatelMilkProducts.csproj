@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmpAccountsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhalisController.cs" />
@@ -153,7 +154,12 @@
     <Compile Include="Migrations\201912141052043_RemovedSomeColumnInKhalis.designer.cs">
       <DependentUpon>201912141052043_RemovedSomeColumnInKhalis.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912200450268_EmpAccountCreation.cs" />
+    <Compile Include="Migrations\201912200450268_EmpAccountCreation.designer.cs">
+      <DependentUpon>201912200450268_EmpAccountCreation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\EmpAccount.cs" />
     <Compile Include="Models\Employees.cs" />
     <Compile Include="Models\Khali.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,6 +210,11 @@
     <Content Include="Views\Khalis\Details.cshtml" />
     <Content Include="Views\Khalis\Edit.cshtml" />
     <Content Include="Views\Khalis\Index.cshtml" />
+    <Content Include="Views\EmpAccounts\Create.cshtml" />
+    <Content Include="Views\EmpAccounts\Delete.cshtml" />
+    <Content Include="Views\EmpAccounts\Details.cshtml" />
+    <Content Include="Views\EmpAccounts\Edit.cshtml" />
+    <Content Include="Views\EmpAccounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -236,6 +247,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912141052043_RemovedSomeColumnInKhalis.resx">
       <DependentUpon>201912141052043_RemovedSomeColumnInKhalis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912200450268_EmpAccountCreation.resx">
+      <DependentUpon>201912200450268_EmpAccountCreation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
