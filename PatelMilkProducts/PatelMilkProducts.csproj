@@ -158,6 +158,10 @@
     <Compile Include="Migrations\201912200450268_EmpAccountCreation.designer.cs">
       <DependentUpon>201912200450268_EmpAccountCreation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912231334376_AddedDateToAccounts.cs" />
+    <Compile Include="Migrations\201912231334376_AddedDateToAccounts.designer.cs">
+      <DependentUpon>201912231334376_AddedDateToAccounts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmpAccount.cs" />
     <Compile Include="Models\Employees.cs" />
@@ -250,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912200450268_EmpAccountCreation.resx">
       <DependentUpon>201912200450268_EmpAccountCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912231334376_AddedDateToAccounts.resx">
+      <DependentUpon>201912231334376_AddedDateToAccounts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

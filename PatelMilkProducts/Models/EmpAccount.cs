@@ -11,6 +11,7 @@ namespace PatelMilkProducts.Models
         public int EmployeesId { get; set; }
         public int Amount { get; set; }
         public string TransactionType { get; set; }
+        public DateTime CurrDate { get; set; }
         public string Signature { get; set; }
         public string Comments { get; set; }
 

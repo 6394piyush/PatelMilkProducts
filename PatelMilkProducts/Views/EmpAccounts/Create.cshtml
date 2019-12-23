@@ -67,9 +67,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Name</label>
+            <label class="control-label col-md-2">Name</label>
             <div class="col-md-10">
-                <select id="showMembers" name=""></select>
+                <select id="showMembers" name="EmployeesId" class="form-control"></select>
             </div>
         </div>
 
@@ -85,11 +85,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TransactionType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TransactionType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.TransactionType, new SelectList(Enum.GetValues(typeof(TransactionType))), "--Select--Transaction--", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TransactionType, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CurrDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CurrDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Signature, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

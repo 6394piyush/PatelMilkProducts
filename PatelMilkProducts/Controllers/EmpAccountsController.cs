@@ -48,7 +48,7 @@ namespace PatelMilkProducts.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,EmployeesId,Amount,TransactionType,Signature,Comments")] EmpAccount empAccount)
+        public ActionResult Create([Bind(Include = "Id,EmployeesId,Amount,TransactionType,Signature,Comments,CurrDate")] EmpAccount empAccount)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace PatelMilkProducts.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,EmployeesId,Amount,TransactionType,Signature,Comments")] EmpAccount empAccount)
+        public ActionResult Edit([Bind(Include = "Id,EmployeesId,Amount,TransactionType,Signature,Comments,CurrDate")] EmpAccount empAccount)
         {
             if (ModelState.IsValid)
             {
@@ -127,6 +127,10 @@ namespace PatelMilkProducts.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public JsonResult GetVillageMembers(string vname)
+        {
+            return Json(db.Employees.Where(emp => (emp.Village == vname)).ToList());
         }
     }
 }

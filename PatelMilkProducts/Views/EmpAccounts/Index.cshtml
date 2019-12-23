@@ -39,6 +39,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Comments)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrDate)
+            </th>
             <th></th>
         </tr>
     
@@ -64,6 +67,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrDate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
