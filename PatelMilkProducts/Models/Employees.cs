@@ -24,6 +24,7 @@ namespace PatelMilkProducts.Models
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Khali> Khali { get; set; }
         public DbSet<EmpAccount> EmpAccounts { get; set; }
+        public DbSet<MilkEntryUpload> MilkEntryUploads { get; set; }
     }
     public enum Village
     {

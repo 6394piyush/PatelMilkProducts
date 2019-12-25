@@ -129,11 +129,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EmpAccountsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhalisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\FileExt.cs" />
     <Compile Include="Migrations\201912140530528_EmployeeCreation.cs" />
     <Compile Include="Migrations\201912140530528_EmployeeCreation.designer.cs">
       <DependentUpon>201912140530528_EmployeeCreation.cs</DependentUpon>
@@ -162,10 +164,16 @@
     <Compile Include="Migrations\201912231334376_AddedDateToAccounts.designer.cs">
       <DependentUpon>201912231334376_AddedDateToAccounts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912240412154_MilkEntryUpload.cs" />
+    <Compile Include="Migrations\201912240412154_MilkEntryUpload.designer.cs">
+      <DependentUpon>201912240412154_MilkEntryUpload.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmpAccount.cs" />
     <Compile Include="Models\Employees.cs" />
+    <Compile Include="Models\ImportExcel.cs" />
     <Compile Include="Models\Khali.cs" />
+    <Compile Include="Models\MilkEntryUpload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,9 +227,11 @@
     <Content Include="Views\EmpAccounts\Details.cshtml" />
     <Content Include="Views\EmpAccounts\Edit.cshtml" />
     <Content Include="Views\EmpAccounts\Index.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -257,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912231334376_AddedDateToAccounts.resx">
       <DependentUpon>201912231334376_AddedDateToAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912240412154_MilkEntryUpload.resx">
+      <DependentUpon>201912240412154_MilkEntryUpload.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
