@@ -1,0 +1,24 @@
+﻿@model PatelMilkProducts.Models.ImportExcel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h4>@ViewBag.Result</h4>
+        @using (Html.BeginForm("Index", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.TextBoxFor(m => m.file, new { type = "file" })
+            <button id="submitButton" type="submit">Submit</button>
+            @Html.ValidationMessageFor(model => model.file)
+        }
+    </div>
+</body>
+</html>
