@@ -1,0 +1,77 @@
+﻿@model IEnumerable<PatelMilkProducts.Models.MilkEntryUpload>
+@using PatelMilkProducts.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")" type="text/javascript"></script>
+    <script>
+
+         $(document).ready(function () {
+
+             
+             $("#btnsubmit").click(function () {
+                 
+               
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetVillages")',
+                    dataType: 'json',
+                    data: { VName: $("#SelectVillage").val(),Sy:$("#SelectYear").val(),Sm:$("#SelectMonth").val()},
+                    success: function (vil) {
+                        
+
+                        // states contains the JSON formatted list
+                        // of states passed from the controller
+                        $.each(vil, function (i, member) {
+                            $("#VillageMembers").append("<tr><td>" + member['Employees']['Name'] + "</td><td>" + member['Employees']['FatherName'] + "</td><td>" + member['TotalMilk'] + "</td><td>" + member['Amount'] + "</td><td><a href='/MilkEntryUploads/Edit/" + member['Id'] + "'>Edit|</a></td><td><a href='/MilkEntryUploads/Details/" + member['Id'] + "'>Details|</a></td><td><a href='/MilkEntryUploads/Delete/" + member['Id'] + "'> Delete</a></td></tr>");
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Index", "File")
+    </p>
+    @using (Html.BeginForm())
+    {
+    <p>
+        @Html.DropDownList("SelectVillage", new SelectList(Enum.GetValues(typeof(Village))), "--Select--Village--", new { @class = "form-control" })
+    </p>
+    <p>
+        @Html.DropDownList("SelectYear", new SelectList(Enum.GetValues(typeof(SelectYear))), "--Select--Year--", new { @class = "form-control" })
+    </p>
+    <p>
+        @Html.DropDownList("SelectMonth", new SelectList(Enum.GetValues(typeof(Months))), "--Select--Month--", new { @class = "form-control" })
+    </p>
+    <input type="submit" value="Show List" class="btn btn-default" id="btnsubmit"/>
+    }
+    <table class=" table">
+        <tr>
+            <th>Name</th>
+            <th>Father Name</th>
+            <th>Total Milk</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+        <tbody id="VillageMembers">
+        </tbody>
+    </table>
+</body>
+</html>

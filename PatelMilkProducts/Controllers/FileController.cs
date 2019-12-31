@@ -47,12 +47,12 @@ namespace PatelMilkProducts.Controllers
                 SqlBulkCopy sqlBulk = new SqlBulkCopy(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
 
                 
-                //Give your Destination table name
+                //Destination table name
                 sqlBulk.DestinationTableName = "MilkEntryUploads";
                 //Mappings
                 
-                sqlBulk.ColumnMappings.Add("Village", "VillageName");
-                sqlBulk.ColumnMappings.Add("Name", "EmployeeNameHindi");
+                sqlBulk.ColumnMappings.Add("EmployeeId", "EmployeesId");
+                
                 sqlBulk.ColumnMappings.Add("_1", "_1");
                 sqlBulk.ColumnMappings.Add("_2", "_2");
                 sqlBulk.ColumnMappings.Add("_3", "_3");
@@ -86,13 +86,16 @@ namespace PatelMilkProducts.Controllers
                 sqlBulk.ColumnMappings.Add("_31", "_31");
                 sqlBulk.ColumnMappings.Add("Total", "TotalMilk");
                 sqlBulk.ColumnMappings.Add("Amount", "Amount");
+                sqlBulk.ColumnMappings.Add("Year", "SYear");
+                sqlBulk.ColumnMappings.Add("Month", "SMonth");
 
-                
+
 
                 sqlBulk.WriteToServer(dReader);
                 excelConnection.Close();
 
                 ViewBag.Result = "Successfully Imported";
+               
             }
 
             return View();

@@ -1,0 +1,52 @@
+﻿@model PatelMilkProducts.VIewModels.OverallDetails
+@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        List of Employee Details
+        <ul>
+            @foreach (var e in Model.Employees)
+            {
+                <li>
+                    @e.Name;
+                </li>
+                <li>
+                    @e.FatherName;
+                </li>
+                <li>
+                    @e.Village;
+                </li>
+                
+
+            }
+        </ul>
+        <ul>
+            @foreach (var e in Model.Khali)
+            {
+                <li>
+                    @e.Qty;
+                </li>
+                <li>
+                    @e.GivenDate;
+                </li>
+                <li>
+                    @e.Rate;
+                </li>
+                <li>
+                    @e.Signature;
+                </li>
+
+
+            }
+        </ul>
+    </div>
+</body>
+</html>

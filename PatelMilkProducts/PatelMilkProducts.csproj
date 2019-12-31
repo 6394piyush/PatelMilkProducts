@@ -132,6 +132,8 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhalisController.cs" />
+    <Compile Include="Controllers\MilkEntryUploadsController.cs" />
+    <Compile Include="Controllers\OverallDetailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -168,6 +170,26 @@
     <Compile Include="Migrations\201912240412154_MilkEntryUpload.designer.cs">
       <DependentUpon>201912240412154_MilkEntryUpload.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912251212484_MilkUploadFloat.cs" />
+    <Compile Include="Migrations\201912251212484_MilkUploadFloat.designer.cs">
+      <DependentUpon>201912251212484_MilkUploadFloat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912260552008_MilkEntryMonthYearUpdate.cs" />
+    <Compile Include="Migrations\201912260552008_MilkEntryMonthYearUpdate.designer.cs">
+      <DependentUpon>201912260552008_MilkEntryMonthYearUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912311247018_FileUploadChnages.cs" />
+    <Compile Include="Migrations\201912311247018_FileUploadChnages.designer.cs">
+      <DependentUpon>201912311247018_FileUploadChnages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912311249356_FileUploadChnages_1.cs" />
+    <Compile Include="Migrations\201912311249356_FileUploadChnages_1.designer.cs">
+      <DependentUpon>201912311249356_FileUploadChnages_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912311421297_FileUploadAddedForeignKey.cs" />
+    <Compile Include="Migrations\201912311421297_FileUploadAddedForeignKey.designer.cs">
+      <DependentUpon>201912311421297_FileUploadAddedForeignKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmpAccount.cs" />
     <Compile Include="Models\Employees.cs" />
@@ -175,6 +197,7 @@
     <Compile Include="Models\Khali.cs" />
     <Compile Include="Models\MilkEntryUpload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VIewModels\OverallDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -228,6 +251,12 @@
     <Content Include="Views\EmpAccounts\Edit.cshtml" />
     <Content Include="Views\EmpAccounts\Index.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\MilkEntryUploads\Create.cshtml" />
+    <Content Include="Views\MilkEntryUploads\Delete.cshtml" />
+    <Content Include="Views\MilkEntryUploads\Details.cshtml" />
+    <Content Include="Views\MilkEntryUploads\Edit.cshtml" />
+    <Content Include="Views\MilkEntryUploads\Index.cshtml" />
+    <Content Include="Views\OverallDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -270,6 +299,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912240412154_MilkEntryUpload.resx">
       <DependentUpon>201912240412154_MilkEntryUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251212484_MilkUploadFloat.resx">
+      <DependentUpon>201912251212484_MilkUploadFloat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912260552008_MilkEntryMonthYearUpdate.resx">
+      <DependentUpon>201912260552008_MilkEntryMonthYearUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912311247018_FileUploadChnages.resx">
+      <DependentUpon>201912311247018_FileUploadChnages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912311249356_FileUploadChnages_1.resx">
+      <DependentUpon>201912311249356_FileUploadChnages_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912311421297_FileUploadAddedForeignKey.resx">
+      <DependentUpon>201912311421297_FileUploadAddedForeignKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
