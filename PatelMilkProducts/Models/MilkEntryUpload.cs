@@ -8,8 +8,9 @@ namespace PatelMilkProducts.Models
     public class MilkEntryUpload
     {
         public int Id { get; set; }
-        public string VillageName { get; set; }
-        public string EmployeeNameHindi { get; set; }
+        public int EmployeesId { get; set; }
+        public string SYear { get; set; }
+        public string SMonth { get; set; }
         public double _1 { get; set; }
         public double _2 { get; set; }
         public double _3 { get; set; }
@@ -43,8 +44,31 @@ namespace PatelMilkProducts.Models
         public double _31 { get; set; }
 
         public double TotalMilk { get; set; }
-        public double Amount { get; set; }
-
+        public double Amount { get; set; }        
+        public virtual Employees Employees { get; set; }
 
     }
+    public enum Months
+    {
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December
+    };
+    public enum SelectYear
+    {
+        Y2018,
+        Y2019,
+        Y2020,
+        Y2021
+    };
+    
 }
