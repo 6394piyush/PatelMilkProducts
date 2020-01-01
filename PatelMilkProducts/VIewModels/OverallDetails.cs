@@ -12,6 +12,8 @@ namespace PatelMilkProducts.VIewModels
         
         public List<Employees> Employees { get; set; }
         public List<Khali> Khali { get; set; }
-     //   public IEnumerable<MilkEntryUpload> MilkEntryUploads { get; set; }
+        public IEnumerable<MilkEntryUpload> MilkEntryUploads { get; set; }
+        public IEnumerable<EmpAccount> EmpAccounts { get; set; }
+        
     }
 }

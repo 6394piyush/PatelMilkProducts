@@ -31,7 +31,7 @@
                         // states contains the JSON formatted list
                         // of states passed from the controller
                         $.each(vil, function (i, member) {
-                            $("#VillageMembers").append("<tr><td>" + member['Name'] + "</td><td>" + member['FatherName'] + "</td><td>" + member['Village'] + "</td><td>" + member['Contact'] + "</td><td><a href='/Employees/Edit/" + member['Id'] + "'>Edit|</a></td><td><a href='/Employees/Details/" + member['Id'] + "'>Details|</a></td><td><a href='/Employees/Delete/" + member['Id'] + "'> Delete</a></td></tr>");
+                            $("#VillageMembers").append("<tr><td>" + member['Name'] + "</td><td>" + member['FatherName'] + "</td><td>" + member['Village'] + "</td><td>" + member['Contact'] + "</td><td><a href='/Employees/Edit/" + member['Id'] + "'>Edit|</a></td><td><a href='/OverallDetails/Index/" + member['Id'] + "'>Details|</a></td><td><a href='/Employees/Delete/" + member['Id'] + "'> Delete</a></td></tr>");
 
                         });
                     },

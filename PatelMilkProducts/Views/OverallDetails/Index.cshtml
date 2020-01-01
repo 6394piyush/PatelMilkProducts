@@ -1,6 +1,9 @@
 ﻿@model PatelMilkProducts.VIewModels.OverallDetails
 @{
     ViewBag.Title = "Index";
+    int total_right=0;
+    double total_left = 0;
+
 }
 <!DOCTYPE html>
 
@@ -8,45 +11,99 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    @Styles.Render("~/Content/css")
 </head>
 <body>
     <div>
-        List of Employee Details
-        <ul>
+        
+        <table class="table">
             @foreach (var e in Model.Employees)
             {
-                <li>
-                    @e.Name;
-                </li>
-                <li>
-                    @e.FatherName;
-                </li>
-                <li>
-                    @e.Village;
-                </li>
-                
+            <tr>
+                <Td>
+                    <b>Employee Name - </b>@e.Name
+                </Td>
+                <td>
+                   <b>Father Name - </b> @e.FatherName
+                </td>
+                <td>
+                    <b>Village - </b>@e.Village
+                </td>
+            </tr>
 
             }
-        </ul>
-        <ul>
-            @foreach (var e in Model.Khali)
-            {
-                <li>
-                    @e.Qty;
-                </li>
-                <li>
-                    @e.GivenDate;
-                </li>
-                <li>
-                    @e.Rate;
-                </li>
-                <li>
-                    @e.Signature;
-                </li>
-
-
-            }
-        </ul>
+        </table>
+       
+       
+       
     </div>
+    <div>
+        <div style="float:left;border-right:solid;border-color:blue;width:50%">
+            <table class="table">
+                @foreach (var e in Model.MilkEntryUploads)
+                {
+                    <tr>
+                        <td>
+                        <td style="border:dotted;border-bottom-color:darkblue;border-right-color:darkblue"><b>@e.Amount</b></td>
+
+                        </td>
+                        <td>
+                            <div class="hidden"> @(total_left = total_left + e.Amount)</div>
+                            @e.Amount Rupaiye  @e.TotalMilk Liter Dudh Dene Hetu-- @e.SMonth-@e.SYear
+                        </td>
+
+                    </tr>
+
+
+
+
+                }
+            </table>
+            <hr style="border:solid" />
+            <div style="float:left"> &nbsp;&nbsp;&nbsp;<b>@total_left</b></div>
+        </div>
+        <div style="float:right;border-left:solid;border-color:blue;width:50%">
+            <table class="table">
+                @foreach (var e in Model.Khali)
+                {
+                    <tr>
+                        <td>
+                        <td style="border:dotted;border-bottom-color:darkblue;border-right-color:darkblue"><b>@(e.Qty * e.Rate)</b></td>
+
+                        </td>
+                        <td>
+                            @(e.Qty * e.Rate) Rupaiye  khali thela @e.Qty Tarikh <b>@e.GivenDate.ToString("dd-MM-yyyy")</b>
+                           <div class="hidden"> @(total_right = total_right + e.Qty * e.Rate)</div>
+                        </td>
+                    </tr>
+
+                }
+            </table>
+            <table class="table">
+                @foreach (var e in Model.EmpAccounts)
+                {
+
+                <tr>
+                    <td>
+                        <div class="hidden"> @(total_right = total_right + e.Amount) </div></td>
+                    <td style="border:dotted;border-bottom-color:darkblue;border-right-color:darkblue"><b>@e.Amount</b></td>
+                    <td>@e.Amount Rupaiye Nagdi @e.Comments ke liye <b>@e.CurrDate.ToString("dd-MM-yyyy")</b>
+                    </td>
+
+                </tr>
+
+                }
+
+
+
+
+            </table>
+            <hr style="border:solid"/>
+            <div> &nbsp;&nbsp;&nbsp;<b>@total_right</b></div>
+
+        </div>
+    </div>
+    <br />
+    
 </body>
 </html>

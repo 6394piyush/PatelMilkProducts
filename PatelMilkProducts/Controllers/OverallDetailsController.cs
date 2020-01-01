@@ -16,10 +16,12 @@ namespace PatelMilkProducts.Controllers
             EmpDBContext db = new EmpDBContext();
             List<Employees> emp = db.Employees.Where(p=>p.Id==id).ToList();
             List<Khali> khalis = db.Khali.Where(p=>p.EmployeesId==id).ToList();
+            List<EmpAccount> empacc = db.EmpAccounts.Where(p => p.EmployeesId == id).ToList();
+            List<MilkEntryUpload> meup = db.MilkEntryUploads.Where(p => p.EmployeesId == id).ToList();
 
 
 
-            
+
 
 
             // MilkEntryUpload milk = db.MilkEntryUploads.Find(id);
@@ -27,7 +29,11 @@ namespace PatelMilkProducts.Controllers
             {
                 Employees = emp,
                 Khali = khalis,
+                EmpAccounts = empacc,
+                MilkEntryUploads = meup,
             };
+            
+            
             return View(od);
         }
 
