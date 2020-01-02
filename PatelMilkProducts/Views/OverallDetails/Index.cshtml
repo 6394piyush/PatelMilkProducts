@@ -76,7 +76,7 @@
 
                             </td>
                             <td>
-                                @(e.Qty * e.Rate) Rupaiye  khali thela @e.Qty Tarikh <b>@e.GivenDate.ToLongDateString()</b>
+                                @(e.Qty * e.Rate) Rupaiye  khali thela @e.Qty Tarikh <b>@e.GivenDate.ToString("dd-MM-yyyy")</b>
                                 <div class="hidden"> @(total_right = total_right + e.Qty * e.Rate)</div>
                             </td>
                         </tr>
@@ -95,14 +95,14 @@
                     @if (e.TransactionType == "Debit")
                     {
                         <script>
-                    $("#LeftTable").append('<tr><td><div class="hidden">@(total_left = total_left + e.Amount)</div></td><td style="border:dotted;border-bottom-color:darkblue;border-right-color:darkblue"><b>@e.Amount</b></td><td>@e.Amount Rupaiye Nagdi @e.Comments ke liye <b>@e.CurrDate.ToLongDateString()</b></td></tr>');
+                    $("#LeftTable").append('<tr><td><div class="hidden">@(total_left = total_left + e.Amount)</div></td><td style="border:dotted;border-bottom-color:darkblue;border-right-color:darkblue"><b>@e.Amount</b></td><td>@e.Amount Rupaiye Nagdi @e.Comments ke liye <b>@e.CurrDate.ToString("dd-MM-yyyy")</b></td></tr>');
                         </script>
 
                     }
                     else
                     {
                         <script>
-            $("#rightTable").append('<tr><td><div class="hidden">@(total_right = total_right + e.Amount)</div></td><td style="border:dotted;border-bottom-color:darkblue;border-right-color:darkblue"><b>@e.Amount</b></td><td>@e.Amount Rupaiye Nagdi @e.Comments ke liye <b>@e.CurrDate.ToLongDateString()</b></td></tr>');
+            $("#rightTable").append('<tr><td><div class="hidden">@(total_right = total_right + e.Amount)</div></td><td style="border:dotted;border-bottom-color:darkblue;border-right-color:darkblue"><b>@e.Amount</b></td><td>@e.Amount Rupaiye Nagdi @e.Comments ke liye <b>@e.CurrDate.ToString("dd-MM-yyyy")</b></td></tr>');
                         </script>
                     }
 
