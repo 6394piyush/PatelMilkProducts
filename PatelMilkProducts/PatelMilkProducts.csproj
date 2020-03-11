@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201912311421297_FileUploadAddedForeignKey.designer.cs">
       <DependentUpon>201912311421297_FileUploadAddedForeignKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003111003280_Blankrevert.cs" />
+    <Compile Include="Migrations\202003111003280_Blankrevert.designer.cs">
+      <DependentUpon>202003111003280_Blankrevert.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EmpAccount.cs" />
     <Compile Include="Models\Employees.cs" />
@@ -314,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912311421297_FileUploadAddedForeignKey.resx">
       <DependentUpon>201912311421297_FileUploadAddedForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111003280_Blankrevert.resx">
+      <DependentUpon>202003111003280_Blankrevert.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
