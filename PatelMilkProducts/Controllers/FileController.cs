@@ -24,7 +24,13 @@ namespace PatelMilkProducts.Controllers
         {
             if (ModelState.IsValid)
             {
-                string path = Server.MapPath("~/Content/Upload/" + importExcel.file.FileName.Substring(3));
+               
+                int pos = importExcel.file.FileName.LastIndexOf("\\");
+                string fileName = importExcel.file.FileName.Substring(pos+1);
+                string dateFormat = "A"+DateTime.Now.Year+ DateTime.Now.Month + DateTime.Now.Day;
+                String timeFormat = "A" + DateTime.Now.ToString("hhmmssfff");
+
+                string path = Server.MapPath("~/Content/Upload/"+dateFormat+timeFormat+fileName);
                 importExcel.file.SaveAs(path);
 
                 string excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
@@ -36,7 +42,7 @@ namespace PatelMilkProducts.Controllers
                 excelConnection.Close();
                 //End
 
-                OleDbCommand cmd = new OleDbCommand("Select * from [" + tableName + "]", excelConnection);
+                OleDbCommand cmd = new OleDbCommand("Select * from [" + tableName + "] where EmployeeId is NOT NULL", excelConnection);
 
                 excelConnection.Open();
 
@@ -44,12 +50,14 @@ namespace PatelMilkProducts.Controllers
                 dReader = cmd.ExecuteReader();
 
                 
+                
                 SqlBulkCopy sqlBulk = new SqlBulkCopy(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
 
                 
                 //Destination table name
                 sqlBulk.DestinationTableName = "MilkEntryUploads";
                 //Mappings
+
                 
                 sqlBulk.ColumnMappings.Add("EmployeeId", "EmployeesId");
                 
