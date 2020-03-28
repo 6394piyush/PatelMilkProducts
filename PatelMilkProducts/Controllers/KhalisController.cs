@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using PatelMilkProducts.Models;
@@ -132,5 +133,14 @@ namespace PatelMilkProducts.Controllers
         {
             return Json(db.Employees.Where(emp => (emp.Village == vname)).ToList());
         }
+        public JsonResult GetEntries(int MName)
+        {
+
+            return Json(db.Khali.Where(emp => (emp.GivenDate.Month == MName)).ToList());
+
+
+
+        }
+       
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<PatelMilkProducts.Models.EmpAccount>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -11,12 +11,56 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     @Styles.Render("~/Content/css")
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script>
+        
+            
+        
+        function ShowVal(name)
+        {
+
+
+             $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetEntries")',
+                    dataType: 'json',
+                    data: { MName:name },
+                    success: function (vil) {
+
+                        $("#AccEntries").empty();
+                        // states contains the JSON formatted list
+                        // of states passed from the controller
+                        $.each(vil, function (i, member) {
+                            dateinjson = parseInt(member['CurrDate'].substr(6));
+                            var dateFormat = new Date(dateinjson);
+                            dateFormat.toDateString("dd mm yyyy")
+                            $("#AccEntries").append("<tr><td>" + member['Employees']['Name'] + "</td><td>" + member['Employees']['FatherName'] + "</td><td>" + member['Employees']['Village'] + "</td><td>" + member['Amount'] + "</td><td>" + member['TransactionType'] + "</td><td>" + member['Signature'] + "</td><td>" + member['Comments'] + "</td><td>" + dateFormat.toDateString("dd mm yyyy") + "</td><td><button class='btn'><a href='/EmpAccounts/Edit/" + member['Id'] + "'>Edit</a></button></td><td><button class='btn'><a href='/EmpAccounts/Details/" + member['Id'] + "'>Details</a></button></td><td><button class='btn'><a href='/EmpAccounts/Delete/" + member['Id'] + "'> Delete</a></button></td></tr>");
+                                                                    
+                        });
+                        $("#AccountTable").DataTable();
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve states.' + ex);
+                    }
+                });
+
+        }
+
+
+    </script>
 </head>
 <body>
-    <p>
+    <hr />
+    <button class="btn">
         @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
+    </button>
+
+
+
+    <table class="table" id="AccountTable">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Employees.Name)
@@ -42,43 +86,34 @@
             <th>
                 @Html.DisplayNameFor(model => model.CurrDate)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
-    
-    @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employees.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employees.FatherName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employees.Village)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TransactionType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Signature)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comments)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CurrDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-    }
-    
+        <tbody id="AccEntries" name="AccEntries">
+            <tr><td>Please Select from Pagination</td></tr>
+        </tbody>
+          
+        
+
     </table>
+    <div class="text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                
+                <li><a href="#"onclick="ShowVal(1)">January</a></li>
+                <li><a href="#" onclick="ShowVal(2)">February</a></li>
+                <li><a href="#" onclick="ShowVal(3)">March</a></li>
+                <li><a href="#" onclick="ShowVal(4)">April</a></li>
+                <li><a href="#" onclick="ShowVal(5)" >May</a></li>
+                <li><a href="#" onclick="ShowVal(6)">June</a></li>
+                <li><a href="#" onclick="ShowVal(7)">July</a></li>
+                <li><a href="#" onclick="ShowVal(8)">August</a></li>
+                <li><a href="#" onclick="ShowVal(9)">September</a></li>
+                <li><a href="#" onclick="ShowVal(10)">October</a></li>
+                <li><a href="#" onclick="ShowVal(11)">November</a></li>
+                <li><a href="#" onclick="ShowVal(12)">December</a></li>
+                
+            </ul>
+        </nav>
+    </div>
 </body>
 </html>

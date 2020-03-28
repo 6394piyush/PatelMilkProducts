@@ -3,6 +3,7 @@
     ViewBag.Title = "Index";
     int total_right=0;
     double total_left = 0;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 <!DOCTYPE html>
@@ -26,13 +27,13 @@
                 {
                     <tr>
                         <Td>
-                            <b>Employee Name - </b>@e.Name
+                            <b>Employee Name - </b><h3>@e.Name</h3>
                         </Td>
                         <td>
-                            <b>Father Name - </b> @e.FatherName
+                            <b>Father Name - </b> <h3>@e.FatherName </h3>
                         </td>
                         <td>
-                            <b>Village - </b>@e.Village
+                            <b>Village - </b> <h3>@e.Village </h3>
                         </td>
                     </tr>
 

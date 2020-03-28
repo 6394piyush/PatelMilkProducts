@@ -128,9 +128,22 @@ namespace PatelMilkProducts.Controllers
             }
             base.Dispose(disposing);
         }
-        public JsonResult GetVillageMembers(string vname)
+        [HttpPost]
+        public JsonResult GetEntries(int MName)
         {
-            return Json(db.Employees.Where(emp => (emp.Village == vname)).ToList());
+
+            return Json(db.EmpAccounts.Where(emp => (emp.CurrDate.Month == MName)).ToList());
+            
+
+
         }
+        public JsonResult GetVillageMembers(string VName)
+        {
+            string nn = VName;
+            var vlist = db.Employees.Where(emp => (emp.Village == VName)).ToList();
+                      
+            return Json(vlist);
+        }
+
     }
 }
