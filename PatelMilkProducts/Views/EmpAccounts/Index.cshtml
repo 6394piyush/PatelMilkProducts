@@ -37,7 +37,8 @@
                             dateinjson = parseInt(member['CurrDate'].substr(6));
                             var dateFormat = new Date(dateinjson);
                             dateFormat.toDateString("dd mm yyyy")
-                            $("#AccEntries").append("<tr><td>" + member['Employees']['Name'] + "</td><td>" + member['Employees']['FatherName'] + "</td><td>" + member['Employees']['Village'] + "</td><td>" + member['Amount'] + "</td><td>" + member['TransactionType'] + "</td><td>" + member['Signature'] + "</td><td>" + member['Comments'] + "</td><td>" + dateFormat.toDateString("dd mm yyyy") + "</td><td><button class='btn'><a href='/EmpAccounts/Edit/" + member['Id'] + "'>Edit</a></button></td><td><button class='btn'><a href='/EmpAccounts/Details/" + member['Id'] + "'>Details</a></button></td><td><button class='btn'><a href='/EmpAccounts/Delete/" + member['Id'] + "'> Delete</a></button></td></tr>");
+                            $("#AccEntries").append("<tr><td>" + member['Employees']['Name'] + "</td><td>" + member['Employees']['FatherName'] + "</td><td>" + member['Employees']['Village'] + "</td><td>" + member['Amount'] + "</td><td>" + member['TransactionType'] + "</td><td>" + member['Signature'] + "</td><td>" + member['Comments'] + "</td><td>" + dateFormat.toDateString("dd mm yyyy") + "</td><td><button class='btn'><a href='/EmpAccounts/Edit/" + member['Id'] +"'>Edit</a></button></td><td><button class='btn'><a href='/EmpAccounts/Details/" + member['Id'] + "'>Details</a></button></td><td><button class='btn'><a href='/EmpAccounts/Delete/" + member['Id'] + "'> Delete</a></button></td>}/</tr>");
+                        
                                                                     
                         });
                         $("#AccountTable").DataTable();
@@ -59,7 +60,7 @@
     </button>
 
 
-
+    <
     <table class="table" id="AccountTable">
         <tr>
             <th>

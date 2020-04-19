@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using PatelMilkProducts.Models;
 
 namespace PatelMilkProducts.Controllers
-{
+{   [Authorize(Roles ="Admin")]
     public class MilkEntryUploadsController : Controller
     {
         private EmpDBContext db = new EmpDBContext();

@@ -13,12 +13,11 @@
     @Styles.Render("~/Content/css")
 
     <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")" type="text/javascript"></script>
-    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
-
-    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
     
+
+
     <script>
-         
+
 
         $(document).ready(function () {
            
@@ -58,19 +57,19 @@
     <p>
         @Html.DropDownList("SelectVillage", new SelectList(Enum.GetValues(typeof(Village))), "--Select--Village--", new { @class = "form-control" })
     </p>
-    <table class=" table" id="EmployeeTable" > 
+    <table class=" table" id="EmployeeTable">
         <thead>
-            <th>Name</th>
-            <th>Father Name</th>
-            <th>Village</th>
-            <th>Contact</th>
-            <th>Actions</th>
+        <th>Name</th>
+        <th>Father Name</th>
+        <th>Village</th>
+        <th>Contact</th>
+        <th>Actions</th>
         </thead>
         <tbody id="VillageMembers">
             <tr><td>No Records to Display. Please select a Village From the list above</td></tr>
         </tbody>
     </table>
-    
 
+    
 </body>
 </html>

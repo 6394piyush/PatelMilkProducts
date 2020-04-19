@@ -14,6 +14,7 @@ namespace PatelMilkProducts.Models
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string Village { get; set; }
+        [RegularExpression(@"\d{10}", ErrorMessage = "Please enter 10 digit Mobile No.")]
         public int Contact { get; set; }
 
 
@@ -24,6 +25,10 @@ namespace PatelMilkProducts.Models
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Khali> Khali { get; set; }
         public DbSet<EmpAccount> EmpAccounts { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<RoleMaster> RoleMasters { get; set; }
+        public DbSet<UserRoleMapping> UserRoleMappings { get; set; }
+        public DbSet<UserEmpMapping> UserEmpMappings { get; set; }
         public DbSet<MilkEntryUpload> MilkEntryUploads { get; set; }
     }
     public enum Village

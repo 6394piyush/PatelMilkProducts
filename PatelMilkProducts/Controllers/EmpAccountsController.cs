@@ -6,19 +6,24 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PatelMilkProducts.AccountsDAL;
+using PatelMilkProducts.Helper;
+using PatelMilkProducts.Interfaces;
 using PatelMilkProducts.Models;
 
 namespace PatelMilkProducts.Controllers
-{
+{   [Authorize]
     public class EmpAccountsController : Controller
     {
         private EmpDBContext db = new EmpDBContext();
+        AccountManager am = new AccountManager(new CrudEmpAcc());
 
         // GET: EmpAccounts
         public ActionResult Index()
         {
-            var empAccounts = db.EmpAccounts.Include(e => e.Employees);
-            return View(empAccounts.ToList());
+           
+            return View();
+          
         }
 
         // GET: EmpAccounts/Details/5
@@ -28,7 +33,9 @@ namespace PatelMilkProducts.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmpAccount empAccount = db.EmpAccounts.Find(id);
+
+            EmpAccount empAccount=am.GetAccountsOperations().FindEmpAccount(id);
+
             if (empAccount == null)
             {
                 return HttpNotFound();
@@ -39,7 +46,7 @@ namespace PatelMilkProducts.Controllers
         // GET: EmpAccounts/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name");
+            //ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name");
             return View();
         }
 
@@ -52,12 +59,11 @@ namespace PatelMilkProducts.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.EmpAccounts.Add(empAccount);
-                db.SaveChanges();
+                if(am.GetAccountsOperations().CreateEmpAccount(empAccount))
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", empAccount.EmployeesId);
+            
             return View(empAccount);
         }
 
@@ -68,12 +74,12 @@ namespace PatelMilkProducts.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmpAccount empAccount = db.EmpAccounts.Find(id);
+            EmpAccount empAccount = am.GetAccountsOperations().FindEmpAccount(id);
             if (empAccount == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", empAccount.EmployeesId);
+            ViewBag.EmployeesId = new SelectList(db.Employees.Where(r=>r.Village==empAccount.Employees.Village), "Id", "Name", empAccount.EmployeesId);
             return View(empAccount);
         }
 
@@ -86,11 +92,10 @@ namespace PatelMilkProducts.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(empAccount).State = EntityState.Modified;
-                db.SaveChanges();
+               if(am.GetAccountsOperations().EditEmpAccount(empAccount))
                 return RedirectToAction("Index");
             }
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", empAccount.EmployeesId);
+            ViewBag.EmployeesId = new SelectList(db.Employees.Where(r => r.Village == empAccount.Employees.Village), "Id", "Name", empAccount.EmployeesId);
             return View(empAccount);
         }
 
@@ -101,7 +106,7 @@ namespace PatelMilkProducts.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmpAccount empAccount = db.EmpAccounts.Find(id);
+            EmpAccount empAccount = am.GetAccountsOperations().FindEmpAccount(id);
             if (empAccount == null)
             {
                 return HttpNotFound();
@@ -114,9 +119,7 @@ namespace PatelMilkProducts.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            EmpAccount empAccount = db.EmpAccounts.Find(id);
-            db.EmpAccounts.Remove(empAccount);
-            db.SaveChanges();
+            am.GetAccountsOperations().DeleteEmpAccount(id);
             return RedirectToAction("Index");
         }
 
@@ -130,20 +133,18 @@ namespace PatelMilkProducts.Controllers
         }
         [HttpPost]
         public JsonResult GetEntries(int MName)
-        {
-
-            return Json(db.EmpAccounts.Where(emp => (emp.CurrDate.Month == MName)).ToList());
-            
-
-
+        { 
+            return Json(am.GetAccountsOperations().MonthlyEntries(MName));
         }
+        [HttpPost]
         public JsonResult GetVillageMembers(string VName)
         {
-            string nn = VName;
             var vlist = db.Employees.Where(emp => (emp.Village == VName)).ToList();
                       
             return Json(vlist);
         }
+        
+            
 
     }
 }

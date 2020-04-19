@@ -4,12 +4,15 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using PatelMilkProducts.AccountsDAL;
 using PatelMilkProducts.Models;
 
 namespace PatelMilkProducts.Controllers
 {
+    
     public class EmployeesController : Controller
     {
         private EmpDBContext db = new EmpDBContext();
@@ -19,7 +22,7 @@ namespace PatelMilkProducts.Controllers
         {
             return View(db.Employees.ToList());
         }
-
+        [Authorize(Roles ="Admin,Customer")]
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,7 +37,7 @@ namespace PatelMilkProducts.Controllers
             }
             return View(employees);
         }
-
+        [Authorize(Roles ="Admin")]
         // GET: Employees/Create
         public ActionResult Create()
         {
@@ -44,6 +47,7 @@ namespace PatelMilkProducts.Controllers
         // POST: Employees/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,FatherName,Village,Contact")] Employees employees)
@@ -57,7 +61,7 @@ namespace PatelMilkProducts.Controllers
 
             return View(employees);
         }
-
+        [Authorize(Roles ="Admin,User")]
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -76,6 +80,7 @@ namespace PatelMilkProducts.Controllers
         // POST: Employees/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin,User")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,FatherName,Village,Contact")] Employees employees)
@@ -130,6 +135,7 @@ namespace PatelMilkProducts.Controllers
             //var vlist = db.Employees.ToList();            
             return Json(vlist);
         }
+
 
     }
 }

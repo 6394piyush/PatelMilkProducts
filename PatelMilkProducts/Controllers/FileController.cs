@@ -11,14 +11,14 @@ using System.Data;
 using System.Xml;
 
 namespace PatelMilkProducts.Controllers
-{
+{   [Authorize]
     public class FileController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
-        
+        [Authorize(Roles ="abc,def")]
         [HttpPost]
         public ActionResult Index(ImportExcel importExcel)
         {

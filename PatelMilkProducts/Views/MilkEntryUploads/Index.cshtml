@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<PatelMilkProducts.Models.MilkEntryUpload>
 @using PatelMilkProducts.Models
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
                         // states contains the JSON formatted list
                         // of states passed from the controller
                         $.each(vil, function (i, member) {
-                            $("#VillageMembers").append("<tr><td>" + member['Employees']['Name'] + "</td><td>" + member['Employees']['FatherName'] + "</td><td>" + member['TotalMilk'] + "</td><td>" + member['Amount'] + "</td><td><a href='/MilkEntryUploads/Edit/" + member['Id'] + "'>Edit|</a></td><td><a href='/MilkEntryUploads/Details/" + member['Id'] + "'>Details|</a></td><td><a href='/MilkEntryUploads/Delete/" + member['Id'] + "'> Delete</a></td></tr>");
+                            $("#VillageMembers").append("<tr><td>" + member['Employees']['Name'] + "</td><td>" + member['Employees']['FatherName'] + "</td><td>" + member['TotalMilk'] + "</td><td>" + member['Amount'] + "</td><td><button class='btn'><a href='/MilkEntryUploads/Edit/" + member['Id'] + "'>Edit</a></button></td><td><button class='btn'><a href='/MilkEntryUploads/Details/" + member['Id'] + "'>Details</a></button></td><td><button class='btn'><a href='/MilkEntryUploads/Delete/" + member['Id'] + "'> Delete</a></button></td></tr>");
 
                         });
                     },
@@ -46,6 +46,7 @@
     </script>
 </head>
 <body>
+    <hr />
     <p>
         @Html.ActionLink("Create New", "Index", "File")
     </p>

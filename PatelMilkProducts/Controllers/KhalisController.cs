@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using PatelMilkProducts.Models;
 
 namespace PatelMilkProducts.Controllers
-{
+{   [Authorize]
     public class KhalisController : Controller
     {
         private EmpDBContext db = new EmpDBContext();
@@ -136,7 +136,7 @@ namespace PatelMilkProducts.Controllers
         public JsonResult GetEntries(int MName)
         {
 
-            return Json(db.Khali.Where(emp => (emp.GivenDate.Month == MName)).ToList());
+                return Json(db.Khali.Where(emp => (emp.GivenDate.Month == MName)).ToList());
 
 
 

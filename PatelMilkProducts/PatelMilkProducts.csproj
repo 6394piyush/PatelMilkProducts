@@ -124,9 +124,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountsDAL\CrudEmpAcc.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\EmpAccountsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -134,10 +136,19 @@
     <Compile Include="Controllers\KhalisController.cs" />
     <Compile Include="Controllers\MilkEntryUploadsController.cs" />
     <Compile Include="Controllers\OverallDetailsController.cs" />
+    <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AccountManager.cs" />
     <Compile Include="Helper\FileExt.cs" />
+    <Compile Include="Helper\PasswordHasher.cs" />
+    <Compile Include="Helper\RegistrationDAL.cs" />
+    <Compile Include="Helper\RegistrationManager.cs" />
+    <Compile Include="Interfaces\IAccountsOperations.cs" />
+    <Compile Include="Interfaces\IEmployeeOperations.cs" />
+    <Compile Include="Interfaces\IKhaliOperations.cs" />
+    <Compile Include="Interfaces\IMilkEntryOperations.cs" />
     <Compile Include="Migrations\201912140530528_EmployeeCreation.cs" />
     <Compile Include="Migrations\201912140530528_EmployeeCreation.designer.cs">
       <DependentUpon>201912140530528_EmployeeCreation.cs</DependentUpon>
@@ -194,14 +205,41 @@
     <Compile Include="Migrations\202003111003280_Blankrevert.designer.cs">
       <DependentUpon>202003111003280_Blankrevert.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004101035481_UserRoles.cs" />
+    <Compile Include="Migrations\202004101035481_UserRoles.designer.cs">
+      <DependentUpon>202004101035481_UserRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004101059142_userroleupdate.cs" />
+    <Compile Include="Migrations\202004101059142_userroleupdate.designer.cs">
+      <DependentUpon>202004101059142_userroleupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004101101578_MappingCorrection.cs" />
+    <Compile Include="Migrations\202004101101578_MappingCorrection.designer.cs">
+      <DependentUpon>202004101101578_MappingCorrection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004130535048_LoginChanges.cs" />
+    <Compile Include="Migrations\202004130535048_LoginChanges.designer.cs">
+      <DependentUpon>202004130535048_LoginChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004140810418_userEmpMapping.cs" />
+    <Compile Include="Migrations\202004140810418_userEmpMapping.designer.cs">
+      <DependentUpon>202004140810418_userEmpMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AuthManager.cs" />
     <Compile Include="Models\EmpAccount.cs" />
     <Compile Include="Models\Employees.cs" />
     <Compile Include="Models\ImportExcel.cs" />
     <Compile Include="Models\Khali.cs" />
     <Compile Include="Models\MilkEntryUpload.cs" />
+    <Compile Include="Models\RoleMaster.cs" />
+    <Compile Include="Models\UserEmpMapping.cs" />
+    <Compile Include="Models\UserRoleMapping.cs" />
+    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\UsersRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VIewModels\OverallDetails.cs" />
+    <Compile Include="VIewModels\Signup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -381,6 +419,47 @@
     <Content Include="Content\Milk_breakfast.jpg" />
     <Content Include="Content\Milk_glass.jpg" />
     <Content Include="Content\Milk_glass_1.jpg" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -472,11 +551,14 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ShowVillageMembers.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -513,10 +595,20 @@
     <Content Include="Views\MilkEntryUploads\Edit.cshtml" />
     <Content Include="Views\MilkEntryUploads\Index.cshtml" />
     <Content Include="Views\OverallDetails\Index.cshtml" />
+    <Content Include="Views\Accounts\Create.cshtml" />
+    <Content Include="Views\Accounts\Delete.cshtml" />
+    <Content Include="Views\Accounts\Details.cshtml" />
+    <Content Include="Views\Accounts\Edit.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Signup\Register.cshtml" />
+    <Content Include="Views\Employees\GetEmpAsync.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
+    <Folder Include="EmployeesDAL\" />
+    <Folder Include="KhaliDAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -573,6 +665,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003111003280_Blankrevert.resx">
       <DependentUpon>202003111003280_Blankrevert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004101035481_UserRoles.resx">
+      <DependentUpon>202004101035481_UserRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004101059142_userroleupdate.resx">
+      <DependentUpon>202004101059142_userroleupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004101101578_MappingCorrection.resx">
+      <DependentUpon>202004101101578_MappingCorrection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004130535048_LoginChanges.resx">
+      <DependentUpon>202004130535048_LoginChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004140810418_userEmpMapping.resx">
+      <DependentUpon>202004140810418_userEmpMapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

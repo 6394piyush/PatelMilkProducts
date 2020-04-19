@@ -13,6 +13,7 @@ namespace PatelMilkProducts.Models
         public int Amount { get; set; }
         public string TransactionType { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime CurrDate { get; set; }
         public string Signature { get; set; }
         public string Comments { get; set; }

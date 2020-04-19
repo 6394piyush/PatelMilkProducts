@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace PatelMilkProducts.Controllers
-{
+{   [Authorize]
     public class OverallDetailsController : Controller
     {
         // GET: OverallDetails
