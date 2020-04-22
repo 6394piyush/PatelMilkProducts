@@ -4,15 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace PatelMilkProducts.Interfaces
 {
-    interface IKhaliOperations
+    public interface IKhaliOperations
     {
-        IList<Khali> GetKhali();
-        Khali FindKhali(int id);
+        List<Khali> GetAllKhalis();
+        bool CreateKhali(Khali khali);
+        Khali FindKhali(int? id);
 
         bool EditKhali(Khali khali);
-        bool DeleteKhali(int id);
+        bool DeleteKhali(int? id);
+        List<Khali> MonthlyEntries(int month);
+        SelectList editListKhali(int id, string village);
     }
 }

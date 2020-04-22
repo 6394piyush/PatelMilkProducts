@@ -153,5 +153,11 @@ namespace PatelMilkProducts.Controllers
             }
             base.Dispose(disposing);
         }
+        public PartialViewResult GetVillageMembers()
+        {
+            var vlist = db.Employees.Where(emp => (emp.Village == "Chapda")).ToList();
+
+            return PartialView("GetVillageMembers",vlist);
+        }
     }
 }

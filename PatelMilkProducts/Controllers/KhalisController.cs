@@ -7,6 +7,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using PatelMilkProducts.Helper;
+using PatelMilkProducts.KhaliDAL;
 using PatelMilkProducts.Models;
 
 namespace PatelMilkProducts.Controllers
@@ -14,95 +16,95 @@ namespace PatelMilkProducts.Controllers
     public class KhalisController : Controller
     {
         private EmpDBContext db = new EmpDBContext();
+        private KhalisManager km = new KhalisManager(new CrudKhali());
 
-        // GET: Khalis
+        #region GET: Khalis
         public ActionResult Index()
         {
-            var khali = db.Khali.Include(k => k.Employees);
-            return View(khali.ToList());
+            
+            return View(km.GetKhaliOperations().GetAllKhalis());
         }
+        #endregion
 
-        // GET: Khalis/Details/5
+        #region GET: Khalis/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khali khali = db.Khali.Find(id);
+            Khali khali=km.GetKhaliOperations().FindKhali(id);
+
             if (khali == null)
             {
                 return HttpNotFound();
             }
             return View(khali);
         }
+        #endregion
 
-        // GET: Khalis/Create
+        #region GET: Khalis/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name");
             return View();
         }
+        #endregion
 
-        // POST: Khalis/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        #region POST: Khalis/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,EmployeesId,EmployeesName,EmployeesFatherName,EmployeesVillage,Qty,GivenDate,Rate,Signature")] Khali khali)
         {
             if (ModelState.IsValid)
             {
-                db.Khali.Add(khali);
-                db.SaveChanges();
+                km.GetKhaliOperations().CreateKhali(khali);
                 return RedirectToAction("Index");
             }
-
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", khali.EmployeesId);
             return View(khali);
         }
+        #endregion
 
-        // GET: Khalis/Edit/5
+        #region GET: Khalis/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khali khali = db.Khali.Find(id);
+            Khali khali = km.GetKhaliOperations().FindKhali(id);
             if (khali == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", khali.EmployeesId);
+            ViewBag.EmployeesId = km.GetKhaliOperations().editListKhali(khali.Employees.Id, khali.Employees.Village);
             return View(khali);
         }
+        #endregion
 
-        // POST: Khalis/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        #region POST: Khalis/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,EmployeesId,EmployeesName,EmployeesFatherName,EmployeesVillage,Qty,GivenDate,Rate,Signature")] Khali khali)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(khali).State = EntityState.Modified;
-                db.SaveChanges();
+                km.GetKhaliOperations().EditKhali(khali);
                 return RedirectToAction("Index");
             }
-            ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name", khali.EmployeesId);
+            ViewBag.EmployeesId = km.GetKhaliOperations().editListKhali(khali.Employees.Id, khali.Employees.Village);
             return View(khali);
         }
+        #endregion
 
-        // GET: Khalis/Delete/5
+        #region GET: Khalis/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Khali khali = db.Khali.Find(id);
+            Khali khali = km.GetKhaliOperations().FindKhali(id);
             if (khali == null)
             {
                 return HttpNotFound();
@@ -110,17 +112,19 @@ namespace PatelMilkProducts.Controllers
             return View(khali);
         }
 
-        // POST: Khalis/Delete/5
+        #endregion
+
+        #region POST: Khalis/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Khali khali = db.Khali.Find(id);
-            db.Khali.Remove(khali);
-            db.SaveChanges();
+            
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region Dispose Objects
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -129,18 +133,21 @@ namespace PatelMilkProducts.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
+        #region Get Village Members
         public JsonResult GetVillageMembers(string vname)
         {
             return Json(db.Employees.Where(emp => (emp.Village == vname)).ToList());
         }
+        #endregion
+
+        #region Get Monthly Entries
         public JsonResult GetEntries(int MName)
         {
-
-                return Json(db.Khali.Where(emp => (emp.GivenDate.Month == MName)).ToList());
-
-
-
+                return Json(km.GetKhaliOperations().MonthlyEntries(MName));
         }
-       
+        #endregion
+
     }
 }

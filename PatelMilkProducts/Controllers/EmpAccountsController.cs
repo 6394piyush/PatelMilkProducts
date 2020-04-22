@@ -18,15 +18,17 @@ namespace PatelMilkProducts.Controllers
         private EmpDBContext db = new EmpDBContext();
         AccountManager am = new AccountManager(new CrudEmpAcc());
 
-        // GET: EmpAccounts
+        #region  GET: EmpAccounts
+
         public ActionResult Index()
         {
            
-            return View();
+            return View(am.GetAccountsOperations().GetAllAccounts());
           
         }
+        #endregion
 
-        // GET: EmpAccounts/Details/5
+        #region GET: EmpAccounts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,17 +44,18 @@ namespace PatelMilkProducts.Controllers
             }
             return View(empAccount);
         }
+        #endregion
 
-        // GET: EmpAccounts/Create
+        #region GET: EmpAccounts/Create
         public ActionResult Create()
         {
-            //ViewBag.EmployeesId = new SelectList(db.Employees, "Id", "Name");
+            
             return View();
         }
+        #endregion
 
-        // POST: EmpAccounts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        #region POST: EmpAccounts/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,EmployeesId,Amount,TransactionType,Signature,Comments,CurrDate")] EmpAccount empAccount)
@@ -66,8 +69,9 @@ namespace PatelMilkProducts.Controllers
             
             return View(empAccount);
         }
+        #endregion
 
-        // GET: EmpAccounts/Edit/5
+        #region GET: EmpAccounts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,13 +83,12 @@ namespace PatelMilkProducts.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeesId = new SelectList(db.Employees.Where(r=>r.Village==empAccount.Employees.Village), "Id", "Name", empAccount.EmployeesId);
+            ViewBag.EmployeesId = am.GetAccountsOperations().editListEmpAccounts(empAccount.Employees.Id, empAccount.Employees.Village);
             return View(empAccount);
         }
+        #endregion
 
-        // POST: EmpAccounts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        #region POST: EmpAccounts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,EmployeesId,Amount,TransactionType,Signature,Comments,CurrDate")] EmpAccount empAccount)
@@ -95,11 +98,12 @@ namespace PatelMilkProducts.Controllers
                if(am.GetAccountsOperations().EditEmpAccount(empAccount))
                 return RedirectToAction("Index");
             }
-            ViewBag.EmployeesId = new SelectList(db.Employees.Where(r => r.Village == empAccount.Employees.Village), "Id", "Name", empAccount.EmployeesId);
+            ViewBag.EmployeesId = am.GetAccountsOperations().editListEmpAccounts(empAccount.Employees.Id, empAccount.Employees.Village);
             return View(empAccount);
         }
+        #endregion
 
-        // GET: EmpAccounts/Delete/5
+        #region GET: EmpAccounts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,8 +117,9 @@ namespace PatelMilkProducts.Controllers
             }
             return View(empAccount);
         }
+        #endregion
 
-        // POST: EmpAccounts/Delete/5
+        #region POST: EmpAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -122,7 +127,9 @@ namespace PatelMilkProducts.Controllers
             am.GetAccountsOperations().DeleteEmpAccount(id);
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region Dispose Objects
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -131,11 +138,9 @@ namespace PatelMilkProducts.Controllers
             }
             base.Dispose(disposing);
         }
-        [HttpPost]
-        public JsonResult GetEntries(int MName)
-        { 
-            return Json(am.GetAccountsOperations().MonthlyEntries(MName));
-        }
+        #endregion
+
+        #region Get Village Members
         [HttpPost]
         public JsonResult GetVillageMembers(string VName)
         {
@@ -143,8 +148,8 @@ namespace PatelMilkProducts.Controllers
                       
             return Json(vlist);
         }
-        
-            
+        #endregion
+
 
     }
 }

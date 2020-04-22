@@ -14,7 +14,7 @@
 
     <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/ShowVillageMembers.js")" </script>
+    <script src="@Url.Content("~/Scripts/ShowVillageMembers.js")" ></script>
     
 
 </head>
@@ -64,7 +64,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.CurrDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input class="form-control" type="date" name="CurrDate" id="CurrDate" />
+                    @Html.EditorFor(model => model.CurrDate, new { htmlAttributes = new { @class = "form-control" } })
 
                     @Html.ValidationMessageFor(model => model.CurrDate, "", new { @class = "text-danger" })
                 </div>

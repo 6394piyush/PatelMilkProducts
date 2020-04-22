@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="Helper\AccountManager.cs" />
     <Compile Include="Helper\FileExt.cs" />
+    <Compile Include="Helper\KhalisManager.cs" />
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Helper\RegistrationDAL.cs" />
     <Compile Include="Helper\RegistrationManager.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Interfaces\IEmployeeOperations.cs" />
     <Compile Include="Interfaces\IKhaliOperations.cs" />
     <Compile Include="Interfaces\IMilkEntryOperations.cs" />
+    <Compile Include="KhaliDAL\CrudKhali.cs" />
     <Compile Include="Migrations\201912140530528_EmployeeCreation.cs" />
     <Compile Include="Migrations\201912140530528_EmployeeCreation.designer.cs">
       <DependentUpon>201912140530528_EmployeeCreation.cs</DependentUpon>
@@ -553,6 +555,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -602,13 +606,12 @@
     <Content Include="Views\Accounts\Index.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Signup\Register.cshtml" />
-    <Content Include="Views\Employees\GetEmpAsync.cshtml" />
+    <Content Include="Views\Accounts\GetVillageMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\" />
     <Folder Include="EmployeesDAL\" />
-    <Folder Include="KhaliDAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -4,15 +4,16 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <hr />
 
 <h2>Login</h2>
+    
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Users</h4>
         <hr />
@@ -42,9 +43,12 @@
 }
 
 <div>
-    @Html.ActionLink("New User ?  Register", "Index","Signup")
+    @Html.ActionLink("New User ?  Register", "Index", "Signup")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+    
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
 }

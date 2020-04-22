@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["NameSortParm"] = "Name";
+    int Amount = 0;
 }
 
 <!DOCTYPE html>
@@ -14,11 +14,11 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     @Styles.Render("~/Content/css")
     <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.js")" type="text/javascript"></script>
+
     <script>
         function ShowVal(name)
         {
-
-
              $.ajax({
                     type: 'POST',
                     url: '@Url.Action("GetEntries")',
@@ -32,7 +32,7 @@
                         $.each(vil, function (i, member) {
                             dateinjson = parseInt(member['GivenDate'].substr(6));
                             var dateFormat = new Date(dateinjson);
-                            
+
                             $("#KhaliEntries").append("<tr><td>" + member['Employees']['Name'] + "</td><td>" + member['Employees']['FatherName'] + "</td><td>" + member['Employees']['Village'] + "</td><td>" + member['Qty'] + "</td><td>" + dateFormat.toDateString("dd mm yyyy") + "</td><td>" + member['Rate'] + "</td><td>" + member['Signature'] + "</td><td><button class='btn'><a href='/Khalis/Edit/" + member['Id'] + "'>Edit</a></button></td><td><button class='btn'><a href='/Khalis/Details/" + member['Id'] + "'>Details</a></button></td><td><button class='btn'><a href='/Khalis/Delete/" + member['Id'] + "'> Delete</a></button></td></tr>");
 
                         });
@@ -43,13 +43,7 @@
                 });
 
         }
-
-
-
-
     </script>
-
-
 </head>
 
 
@@ -59,47 +53,93 @@
     <button class="btn">
         @Html.ActionLink("Create New", "Create")
     </button>
-
-    <table class="table">
+    <hr />
+    <table class="table table-bordered" id="KhaliEntries" name="KhaliEntries">
         <thead>
-            
-            <th>
-                
-                @Html.DisplayNameFor(model => model.Employees.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employees.FatherName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employees.Village)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Qty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GivenDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Signature)
-            </th>
-            <th> Actions</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employees.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employees.FatherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employees.Village)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GivenDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Signature)
+        </th>
+        <th>Amount</th>
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <th>Actions</th>
+            }
+        }
         </thead>
-       <tbody id="KhaliEntries" name="KhaliEntries">
-           <tr><td>Please select Month from below</td></tr>
-       </tbody>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employees.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employees.FatherName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employees.Village)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GivenDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Signature)
+                    </td>
+                    <td>
+                        <label>@(Amount = item.Qty * item.Rate)</label>
+                    </td>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+
+        </tbody>
 
     </table>
     <div class="container-fluid" style="align-items:center;width:100%">
-        
+
         <div class="text-center">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    
+
                     <li><a href="#" onclick="ShowVal(1)">January</a></li>
-                    <li><a href="#" onclick="ShowVal(2)" >February</a></li>
+                    <li><a href="#" onclick="ShowVal(2)">February</a></li>
                     <li><a href="#" onclick="ShowVal(3)">March</a></li>
                     <li><a href="#" onclick="ShowVal(4)">April</a></li>
                     <li><a href="#" onclick="ShowVal(5)">May</a></li>
@@ -110,10 +150,15 @@
                     <li><a href="#" onclick="ShowVal(10)">October</a></li>
                     <li><a href="#" onclick="ShowVal(11)">November</a></li>
                     <li><a href="#" onclick="ShowVal(12)">December</a></li>
-                    
+
                 </ul>
             </nav>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#KhaliEntries").DataTable();
+        });
+    </script>
 </body>
 </html>
