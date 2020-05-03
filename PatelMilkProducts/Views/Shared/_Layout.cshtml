@@ -9,78 +9,51 @@
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-    <div class="navbar navbar-fixed-top" style="background-color:#30d1b6">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#30d1b6">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                 
                 </button>
-
-                <p class="nav navbar-brand" style="font-size:x-large;color:white"> <b>Patel Milk Products</b></p>
-                
-
+                @Html.ActionLink("Patel Milk Products", "Index", "Home", new { area = "" }, new { @class = "navbar-brand",@style="color:white;font-weight:bold;font-size:22px" })
             </div>
-            
-                    
-            <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">@Html.ActionLink("Home", "Index", "Home")</button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">@Html.ActionLink("About", "About", "Home")</button>
-                </div>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">@Html.ActionLink("Contact", "Contact", "Home")</button>
-                </div>
-
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default">@Html.ActionLink("EMS", "Index", "Employees")</button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default">@Html.ActionLink("AMS", "Index", "EmpAccounts")</button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default">@Html.ActionLink("KMS", "Index", "Khalis")</button>
-                    </div>
-                    if(User.IsInRole("Admin"))
-                    { 
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default">@Html.ActionLink("MEMS", "Index", "MilkEntryUploads")</button>
-                    </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home",new { controller = "Home" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
+                    <li>@Html.ActionLink("About", "About", "Home",new { controller = "Home" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home",new { controller = "Home" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("EMS", "Index", "Employees",new { controller = "Employees" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
+                        <li>@Html.ActionLink("AMS", "Index", "EmpAccounts",new { controller = "EmpAccounts" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
+                        <li>@Html.ActionLink("KMS", "Index", "Khalis",new { controller = "Khalis" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("MEMS", "Index", "MilkEntryUploads",new { controller = "MilkEntryUploads" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
+                        }
+                    <li>@Html.ActionLink("Logout", "Logout", "Accounts",new { controller = "Accounts" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
                     }
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default">@Html.ActionLink("Logout", "Logout", "Accounts")</button>
-                    </div>
-                }
-                else
-                {
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default">@Html.ActionLink("Login", "Login", "Accounts")</button>
-                    </div>
-
-                }
-
+                    else
+                    {
+                    <li>@Html.ActionLink("Login", "Login", "Accounts",new { controller = "Accounts" },new { @style="color:white;font-weight:bold;font-size:22px"})</li>
+                    }
+                </ul>
             </div>
-
-            </div>
-           
-        
+        </div>
     </div>
+    
     <div class="container body-content">
-        
+
         @RenderBody()
-        <hr />
+        
         <footer>
             &copy; PateInc.
         </footer>
     </div>
 
-    
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
